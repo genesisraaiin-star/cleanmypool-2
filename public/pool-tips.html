@@ -55,7 +55,7 @@
     body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
 
     /* ── NAV (matches main site) ── */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s ease; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid #E2E8F0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s ease; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid #E2E8F0; }
     @media(max-width:768px){ nav { padding: 16px 20px; } }
     .nav-logo img {
       height: 48px;
@@ -139,6 +139,9 @@
 
     /* ── TOC ── */
     .toc-bar {
+      position: sticky;
+      top: 72px;
+      z-index: 100;
       background: var(--off);
       border-bottom: 1px solid #E2E8F0;
       padding: 0 40px;
