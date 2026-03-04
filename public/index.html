@@ -31,18 +31,13 @@
     "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
     "@id": "https://cleanmypool.pro/#business",
     "name": "CleanMyPool LLC",
-    "alternateName": "Clean My Pool Tampa",
     "url": "https://cleanmypool.pro/",
     "telephone": "+18135753535",
     "email": "cleanmypool.fl@gmail.com",
     "foundingDate": "2017",
     "priceRange": "$$",
-    "currenciesAccepted": "USD",
-    "paymentAccepted": "Credit Card, Check",
     "slogan": "All you do is swim.",
-    "description": "Professional weekly pool cleaning service serving South Tampa, Westchase, Carrollwood, Lutz, and Wesley Chapel. Transparent flat monthly pricing starting at $165/mo. No contracts.",
-    "logo": "https://cleanmypool.pro/assets/logo.png",
-    "image": "https://cleanmypool.pro/assets/og-cleanmypool.jpg",
+    "description": "Professional weekly pool cleaning service serving South Tampa, Westchase, Carrollwood, Lutz, and Wesley Chapel.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Tampa",
@@ -50,44 +45,29 @@
       "postalCode": "33629",
       "addressCountry": "US"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 27.9506,
-      "longitude": -82.4572
-    }
+    "geo": { "@type": "GeoCoordinates", "latitude": 27.9506, "longitude": -82.4572 }
   }</script>
 
-  <script type="application/ld+json">{
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://cleanmypool.pro/#service",
-    "name": "Weekly Pool Cleaning Service Tampa Bay",
-    "serviceType": "Pool Cleaning and Maintenance",
-    "provider": {"@id": "https://cleanmypool.pro/#business"}
-  }</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
-    /* ══ NEW COLOR PALETTE ══ */
     :root {
-      --charcoal: #3C3744;     /* Primary Text */
-      --deep-blue: #090C9B;    /* Primary Action */
-      --soft-blue: #5995ED;    /* Hover State / Secondary */
-      --teal: #2DE7E1;         /* Accents / Background Blurs */
-      --pale-yellow: #FAF2A1;  /* Highlights / Badges */
-      --white: #FFFFFF;
-      --bg-light: #F8FAFC;     /* Extremely subtle off-white for section breaks */
-      --border-light: rgba(60, 55, 68, 0.08); /* Soft borders if needed */
+      --teal:      #2DE7E1;
+      --charcoal:  #090C9B;
+      --yellow:    #FAF2A1;
+      --navy:      #090C9B;
+      --sky:       #5995ED;
+      --white:     #FFFFFF;
+      --off-white: #FDFBEA;   /* whisper of yellow — barely there */
+      --border:    rgba(60,55,68,0.12); /* charcoal border, readable on yellow */
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'DM Sans', system-ui, sans-serif;
       background: var(--white);
       color: var(--charcoal);
       -webkit-font-smoothing: antialiased;
@@ -95,335 +75,483 @@
       overflow-x: hidden;
     }
 
-    /* ── NAVIGATION (Glassmorphism) ── */
+    /* ─── NAV ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(255,255,255,0.75); 
-      backdrop-filter: blur(24px); 
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border-light); 
-      padding: 16px 40px;
+      background: rgba(255,255,255,0.80);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 2px solid var(--teal);
+      padding: 18px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: padding 0.4s ease;
+      transition: padding 0.3s;
     }
-    nav.scrolled { padding: 12px 40px; }
-    @media(max-width:768px){ nav { padding: 16px 20px; } nav.scrolled { padding: 12px 20px; } }
+    nav.scrolled { padding: 12px 48px; }
+    @media(max-width:768px){ nav, nav.scrolled { padding: 14px 20px; } }
 
-    .nav-logo img {
-      height: 32px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
+    .nav-wordmark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
       color: var(--charcoal);
       text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s;
+      letter-spacing: -0.01em;
     }
-    .nav-links a:hover { color: var(--soft-blue); }
+    .nav-wordmark em { color: var(--teal); font-style: normal; }
+
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--charcoal); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--sky); }
     @media(max-width:900px){ .nav-links { display: none; } }
 
-    .nav-cta {
-      display: flex; align-items: center; gap: 24px;
-    }
-    .nav-phone {
-      color: var(--charcoal);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    .nav-phone:hover { color: var(--soft-blue); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-phone { color: var(--charcoal); text-decoration: none; font-size: 0.9rem; font-weight: 700; transition: color 0.2s; }
+    .nav-phone:hover { color: var(--sky); }
     @media(max-width:600px){ .nav-phone { display: none; } }
 
     .btn-nav {
-      background: var(--deep-blue);
+      background: var(--navy);
       color: var(--white);
       text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      transition: background-color 0.2s, transform 0.2s;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.2s;
+      letter-spacing: 0.01em;
     }
-    .btn-nav:hover { background: var(--soft-blue); transform: translateY(-1px); }
+    .btn-nav:hover { background: var(--sky); transform: translateY(-1px); }
 
-    /* ── HERO — MINIMALIST FOREFRONT ── */
+    /* ─── HERO ─── */
     .hero {
-      height: 100vh;
-      min-height: 600px;
-      position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
+      padding: 120px 20px 80px;
+      position: relative;
       overflow: hidden;
     }
 
-    /* Ambient Light Orbs */
-    .hero::before {
-      content: '';
+    /* animated gradient mesh background */
+    .hero-bg {
       position: absolute;
-      top: 10%; left: 15%;
-      width: 40vw; height: 40vw;
-      background: var(--teal);
-      filter: blur(120px);
-      opacity: 0.15;
-      border-radius: 50%;
-      z-index: -1;
-      animation: float 10s ease-in-out infinite alternate;
+      inset: 0;
+      z-index: 0;
+      background: var(--white);
     }
-    .hero::after {
-      content: '';
+    .orb {
       position: absolute;
-      bottom: 5%; right: 10%;
-      width: 35vw; height: 35vw;
-      background: var(--pale-yellow);
+      border-radius: 50%;
       filter: blur(100px);
-      opacity: 0.4;
-      border-radius: 50%;
-      z-index: -1;
-      animation: float 12s ease-in-out infinite alternate-reverse;
+      animation: drift linear infinite alternate;
+    }
+    .orb-1 {
+      width: 55vw; height: 55vw;
+      top: -15%; left: -8%;
+      background: var(--teal);
+      opacity: 0.28;
+      animation-duration: 14s;
+    }
+    .orb-2 {
+      width: 40vw; height: 40vw;
+      bottom: -5%; right: 0%;
+      background: var(--yellow);
+      opacity: 0.5;
+      animation-duration: 18s;
+      animation-direction: alternate-reverse;
+    }
+    .orb-3 {
+      width: 30vw; height: 30vw;
+      top: 25%; right: 15%;
+      background: var(--teal);
+      opacity: 0.12;
+      animation-duration: 22s;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px) scale(1); }
-      100% { transform: translateY(-30px) scale(1.05); }
+    @keyframes drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -40px) scale(1.08); }
     }
 
-    .hero-slogan {
-      font-size: clamp(3.5rem, 10vw, 7rem);
-      font-weight: 800;
+    .hero-eyebrow {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
       color: var(--charcoal);
-      line-height: 1.05;
-      letter-spacing: -0.05em;
-      margin-bottom: 24px;
-      z-index: 10;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
     }
-    .hero-slogan span {
-      color: var(--deep-blue);
-    }
+    .hero-eyebrow::before { content: '★'; color: var(--navy); }
 
-    .hero-subtext {
-      font-size: clamp(1.1rem, 2vw, 1.3rem);
+    .hero-headline {
+      position: relative;
+      z-index: 1;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.8rem, 11vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+    .hero-headline .accent { color: var(--teal); font-style: italic; }
+
+    .hero-sub {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
       font-weight: 400;
       color: #666;
-      max-width: 600px;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      z-index: 10;
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .btn-hero {
-      background: var(--deep-blue);
+      background: var(--navy);
       color: var(--white);
-      padding: 18px 40px;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      padding: 18px 44px;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 700;
       text-decoration: none;
-      transition: all 0.3s ease;
-      z-index: 10;
-      box-shadow: 0 10px 30px rgba(9, 12, 155, 0.2);
+      transition: all 0.3s;
+      box-shadow: 0 8px 32px rgba(9,12,155,0.22);
+      letter-spacing: 0.01em;
     }
     .btn-hero:hover {
-      background: var(--soft-blue);
+      background: var(--sky);
       transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(89, 149, 237, 0.3);
+      box-shadow: 0 14px 40px rgba(89,149,237,0.32);
     }
 
-    /* ── TRUST STRIP ── */
+    .hero-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .hero-link:hover { color: var(--navy); }
+    .hero-link .arrow { transition: transform 0.2s; }
+    .hero-link:hover .arrow { transform: translateX(4px); }
+
+    /* ─── TRUST STRIP ─── */
     .trust-strip {
-      background: var(--bg-light);
-      padding: 24px 40px;
+      background: var(--teal);
+      padding: 22px 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 48px;
+      gap: 56px;
       flex-wrap: wrap;
-      border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
     }
-    @media(max-width:768px){ .trust-strip { gap: 24px; padding: 20px; } }
-    
+    @media(max-width:768px){ .trust-strip { gap: 20px; padding: 18px 20px; } }
     .trust-item {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--charcoal);
-    }
-    .trust-item .t-icon { color: var(--teal); font-size: 1.1rem; }
-
-    /* ── SECTION BASE ── */
-    section { padding: 120px 40px; }
-    @media(max-width:768px){ section { padding: 80px 24px; } }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-
-    .label-tag {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--soft-blue);
-      margin-bottom: 16px;
+    }
+    .t-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--navy);
+      flex-shrink: 0;
     }
 
-    .section-h {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
+    /* ─── SECTIONS ─── */
+    section { padding: 120px 48px; }
+    @media(max-width:768px){ section { padding: 80px 20px; } }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       color: var(--charcoal);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
       margin-bottom: 64px;
     }
-    
-    /* ── AIRBNB STYLE CARDS ── */
+    .section-title em { color: var(--teal); font-style: italic; }
+
+    /* ─── CARDS ─── */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
+      gap: 24px;
     }
 
-    .clean-card {
+    .card {
       background: var(--white);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 40px 32px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.04);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-left: 4px solid var(--teal);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
       display: flex;
       flex-direction: column;
     }
-    .clean-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 56px rgba(45,231,225,0.12);
     }
 
-    /* ── HOW IT WORKS ── */
+    /* ─── HOW IT WORKS ─── */
+    #how { background: var(--white); }
+
     .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
       color: var(--teal);
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 16px;
+      line-height: 1;
+      margin-bottom: 20px;
     }
-    .clean-card h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 12px;
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+    }
+    .card p { color: #777; font-size: 0.97rem; line-height: 1.65; }
+
+    /* ─── PRICING ─── */
+    #pricing { background: var(--off-white); }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media(max-width:900px){ .price-grid { grid-template-columns: 1fr; max-width: 440px; } }
+
+    .price-card {
+      border-radius: 24px;
+      padding: 40px 32px;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-top: 4px solid var(--teal);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      background: var(--white);
+    }
+    .price-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(45,231,225,0.14);
+    }
+
+    /* highlighted card — elevated with navy */
+    .price-card.featured {
+      background: var(--navy);
+      border-color: var(--navy);
+      border-top: 4px solid var(--teal);
+      box-shadow: 0 16px 48px rgba(9,12,155,0.18);
+    }
+    .price-card.featured:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px rgba(9,12,155,0.26);
+    }
+
+    .price-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+    .price-card.featured .price-tag { color: var(--teal); }
+
+    .price-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      margin-bottom: 28px;
       letter-spacing: -0.02em;
     }
-    .clean-card p {
-      color: #666;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
+    .price-card.featured .price-name { color: var(--white); }
 
-    /* ── PRICING ── */
-    #pricing { background: var(--bg-light); }
-    .price-type { font-size: 0.85rem; font-weight: 600; color: var(--soft-blue); margin-bottom: 8px; }
-    .price-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
-    .price-num { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-bottom: 32px; }
-    .price-num sub { font-size: 1rem; font-weight: 500; color: #888; }
-    
-    .price-feats { list-style: none; flex-grow: 1; margin-bottom: 40px; }
-    .price-feats li { 
-      font-size: 1rem; 
-      color: #555; 
-      margin-bottom: 16px; 
-      display: flex; 
-      align-items: center; 
+    .price-amount {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+    .price-amount sub {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #aaa;
+      letter-spacing: 0;
+    }
+    .price-card.featured .price-amount { color: var(--white); }
+    .price-card.featured .price-amount sub { color: rgba(255,255,255,0.5); }
+
+    .price-period {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 32px;
+    }
+    .price-card.featured .price-period { color: rgba(255,255,255,0.5); }
+
+    .price-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+    .price-card.featured .price-divider { background: rgba(255,255,255,0.12); }
+
+    .price-feats {
+      list-style: none;
+      flex-grow: 1;
+      margin-bottom: 36px;
+    }
+    .price-feats li {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
       gap: 12px;
     }
-    .price-feats li::before { 
-      content: '✓'; 
-      color: var(--teal); 
-      font-weight: 800;
-      font-size: 1.1rem;
+    .price-feats li::before {
+      content: '';
+      display: inline-block;
+      width: 18px; height: 18px;
+      min-width: 18px;
+      border-radius: 50%;
+      background: var(--teal);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23090C9B' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
     }
+    .price-card.featured .price-feats li { color: rgba(255,255,255,0.85); }
 
     .btn-price {
       display: block;
       text-align: center;
       text-decoration: none;
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 16px;
-      border-radius: 8px;
-      background: var(--bg-light);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 15px;
+      border-radius: 100px;
+      background: #F0F0F0;
       color: var(--charcoal);
       transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.01em;
     }
-    .btn-price:hover { background: #E2E8F0; }
-
-    /* Highlighted Star Card */
-    .clean-card.star {
-      background: var(--deep-blue);
-      color: var(--white);
-      box-shadow: 0 20px 50px rgba(9, 12, 155, 0.2);
-    }
-    .star-badge {
-      position: absolute;
-      top: -14px; left: 32px;
-      background: var(--pale-yellow);
-      color: var(--charcoal);
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 100px;
-    }
-    .clean-card.star .price-type { color: var(--teal); }
-    .clean-card.star .price-title { color: var(--white); }
-    .clean-card.star .price-num sub { color: rgba(255,255,255,0.7); }
-    .clean-card.star .price-feats li { color: rgba(255,255,255,0.9); }
-    .clean-card.star .btn-price {
+    .btn-price:hover { background: var(--teal); color: var(--charcoal); }
+    .price-card.featured .btn-price {
       background: var(--white);
-      color: var(--deep-blue);
+      color: var(--navy);
     }
-    .clean-card.star .btn-price:hover { background: var(--bg-light); }
+    .price-card.featured .btn-price:hover {
+      background: var(--teal);
+      color: var(--charcoal);
+    }
 
-    /* ── INCLUDED ── */
-    .inc-icon { font-size: 2rem; margin-bottom: 20px; }
+    /* ─── INCLUDED ─── */
+    #included { background: var(--charcoal); }
+    #included .eyebrow { color: var(--teal); }
+    #included .section-title { color: var(--white); }
+    #included .card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(45,231,225,0.2);
+      border-left: 4px solid var(--teal);
+    }
+    #included .card:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: var(--teal);
+      border-left-color: var(--teal);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.25);
+    }
+    #included .card h3 { color: var(--white); }
+    #included .card p { color: rgba(255,255,255,0.6); }
+    .inc-icon {
+      font-size: 2.2rem;
+      margin-bottom: 22px;
+      display: block;
+    }
 
-    /* ── AREAS ── */
-    #areas { overflow: hidden; }
+    /* ─── AREAS ─── */
+    #areas { background: var(--off-white); overflow: hidden; }
     .areas-scroll {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       overflow-x: auto;
-      padding-bottom: 24px;
+      padding-bottom: 8px;
       scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
     }
     .areas-scroll::-webkit-scrollbar { display: none; }
+
     .area-chip {
       flex-shrink: 0;
-      display: flex; flex-direction: column;
-      background: var(--bg-light);
-      border-radius: 16px;
-      padding: 32px;
-      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px 32px;
+      min-width: 240px;
       text-decoration: none;
       color: var(--charcoal);
-      transition: background 0.3s ease;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
     }
-    .area-chip:hover { background: #E2E8F0; }
-    .area-name { font-size: 1.2rem; font-weight: 600; margin: 16px 0 8px; }
-    .area-sub { font-size: 0.95rem; color: #666; }
+    .area-chip:hover {
+      border-color: var(--teal);
+      background: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(45,231,225,0.15);
+    }
+    .area-emoji { font-size: 2rem; margin-bottom: 16px; }
+    .area-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.02em; }
+    .area-sub { font-size: 0.88rem; color: #888; }
 
-    /* ── SIGN UP FORM ── */
-    #signup { background: var(--bg-light); }
+    /* ─── SIGNUP ─── */
+    #signup { background: var(--charcoal); }
+
     .signup-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -432,32 +560,46 @@
     }
     @media(max-width:900px){ .signup-layout { grid-template-columns: 1fr; gap: 48px; } }
 
-    .signup-left p { color: #555; font-size: 1.1rem; line-height: 1.7; }
-    .signup-trust { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
-    .signup-trust-item { display: flex; align-items: center; gap: 16px; font-size: 1rem; color: var(--charcoal); font-weight: 500;}
-    .signup-trust-item .icon { color: var(--teal); font-size: 1.2rem; }
+    .signup-left .eyebrow { color: var(--teal); }
+    .signup-left .section-title { color: var(--white); margin-bottom: 20px; }
+    .signup-left p { color: rgba(255,255,255,0.6); font-size: 1.05rem; line-height: 1.7; }
+
+    .signup-trust { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+    .signup-trust-item {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.95rem; color: rgba(255,255,255,0.8); font-weight: 500;
+    }
+    .signup-trust-item .t-dot { background: var(--teal); width: 8px; height: 8px; }
 
     .form-box {
       background: var(--white);
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      border-radius: 24px;
+      padding: 44px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.2);
     }
     @media(max-width:500px){ .form-box { padding: 24px; } }
 
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-    @media(max-width:500px){ .frow { grid-template-columns: 1fr; } }
-    .fgroup { display: flex; flex-direction: column; gap: 8px; }
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media(max-width:480px){ .frow { grid-template-columns: 1fr; } }
+    .fgroup { display: flex; flex-direction: column; gap: 6px; }
     .fgroup.full { grid-column: 1/-1; }
-    .fgroup label { font-size: 0.85rem; font-weight: 600; color: var(--charcoal); }
-    
+    .fgroup label { font-size: 0.8rem; font-weight: 700; color: var(--charcoal); letter-spacing: 0.03em; text-transform: uppercase; }
+
     .fgroup input, .fgroup select {
-      padding: 16px;
-      background: var(--bg-light);
-      border: 1px solid transparent;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      padding: 14px 16px;
+      background: #F4F4F6;
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.97rem;
       color: var(--charcoal);
       outline: none;
       transition: all 0.2s;
@@ -465,317 +607,457 @@
     .fgroup input:focus, .fgroup select:focus {
       background: var(--white);
       border-color: var(--teal);
-      box-shadow: 0 0 0 4px rgba(45, 231, 225, 0.15);
+      box-shadow: 0 0 0 4px rgba(45,231,225,0.14);
     }
 
-    .form-terms { font-size: 0.85rem; color: #777; line-height: 1.6; margin: 24px 0; }
-    .form-terms a { color: var(--deep-blue); text-decoration: underline; }
+    .form-terms { font-size: 0.82rem; color: #999; line-height: 1.6; margin: 20px 0; }
+    .form-terms a { color: var(--navy); }
 
     .btn-submit {
       width: 100%;
-      padding: 18px;
-      background: var(--deep-blue);
+      padding: 17px;
+      background: var(--navy);
       color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
       border: none;
-      border-radius: 8px;
+      border-radius: 100px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: background 0.3s, transform 0.2s;
+      letter-spacing: 0.02em;
     }
-    .btn-submit:hover { background: var(--soft-blue); transform: translateY(-2px); }
+    .btn-submit:hover { background: var(--sky); transform: translateY(-2px); }
 
-    /* ── REVIEWS & FAQ ── */
-    .r-text { font-size: 1.1rem; color: var(--charcoal); line-height: 1.6; margin-bottom: 24px; font-weight: 400;}
-    .r-author { font-weight: 600; font-size: 0.95rem; }
+    /* ─── REVIEWS ─── */
+    #reviews { background: var(--white); }
 
-    .faq-item { 
-      border-bottom: 1px solid var(--border-light); 
-      padding: 24px 0;
+    .review-card {
+      background: var(--off-white);
+      border-radius: 20px;
+      padding: 36px 32px;
+      border: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--teal);
+      box-shadow: 0 16px 40px rgba(45,231,225,0.12);
+    }
+
+    .stars {
+      display: flex; gap: 3px; margin-bottom: 20px;
+    }
+    .star-icon { color: var(--teal); font-size: 1.1rem; }
+
+    .r-text {
+      font-size: 1rem;
+      color: var(--charcoal);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-weight: 400;
+      flex-grow: 1;
+      font-style: italic;
+    }
+    .r-author { font-weight: 700; font-size: 0.88rem; color: var(--teal); letter-spacing: 0.02em; }
+    .r-location { font-size: 0.82rem; color: #aaa; margin-top: 2px; }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--off-white); }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
     }
     .faq-q {
       display: flex; justify-content: space-between; align-items: center;
       cursor: pointer;
-      font-weight: 600; font-size: 1.1rem; color: var(--charcoal);
+      font-weight: 700; font-size: 1rem; color: var(--charcoal);
+      gap: 20px;
     }
-    .faq-icon { color: var(--soft-blue); font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--deep-blue); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .faq-a p { padding-top: 16px; font-size: 1rem; color: #555; line-height: 1.6; }
+    .faq-icon {
+      width: 32px; height: 32px; min-width: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--teal);
+      transition: background 0.3s, transform 0.3s, border-color 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      background: var(--teal);
+      color: var(--charcoal);
+      border-color: var(--teal);
+      transform: rotate(45deg);
+    }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a p { padding-top: 14px; font-size: 0.97rem; color: #666; line-height: 1.7; }
     .faq-item.open .faq-a { max-height: 200px; }
 
-    /* ── FOOTER ── */
+    /* ─── FOOTER ─── */
     footer {
       background: var(--charcoal);
       color: var(--white);
-      padding: 80px 40px 40px;
+      padding: 80px 48px 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
-    @media(max-width:768px){ footer { padding: 60px 24px 30px; } }
+    @media(max-width:768px){ footer { padding: 60px 20px 32px; } }
 
     .footer-top {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 60px;
-      max-width: 1200px;
-      margin: 0 auto 60px;
+      gap: 48px;
+      max-width: 1160px;
+      margin: 0 auto 56px;
     }
-    @media(max-width:900px){ .footer-top { grid-template-columns: 1fr 1fr; gap: 40px;} }
-    @media(max-width:500px){ .footer-top { grid-template-columns: 1fr; } }
+    @media(max-width:900px){ .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media(max-width:480px){ .footer-top { grid-template-columns: 1fr; } }
 
-    .footer-brand p { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-top: 16px; max-width: 300px; }
-    .footer-motto { font-size: 1.2rem; font-weight: 600; color: var(--teal); margin-top: 24px; }
+    .footer-wordmark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .footer-wordmark em { color: var(--teal); font-style: normal; }
+    .footer-brand p { font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.65; margin-top: 14px; max-width: 280px; }
+    .footer-motto { font-size: 1rem; font-weight: 700; color: var(--teal); margin-top: 22px; font-style: italic; }
 
-    .footer-col h5 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 24px; }
+    .footer-col h5 { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; }
     .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 12px; }
-    .footer-col a { text-decoration: none; color: rgba(255,255,255,0.6); font-size: 0.95rem; transition: color 0.2s; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { text-decoration: none; color: rgba(255,255,255,0.6); font-size: 0.93rem; transition: color 0.2s; }
     .footer-col a:hover { color: var(--teal); }
 
-    .footer-bottom { 
-      max-width: 1200px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; 
-      font-size: 0.85rem; color: rgba(255,255,255,0.4); 
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 32px;
+    .footer-bottom {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
     }
-    .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; margin-left: 24px; transition: color 0.2s; }
+    .footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
     .footer-bottom a:hover { color: var(--white); }
 
-    /* ── SCROLL ANIMATIONS ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.on { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
   </style>
 </head>
 <body>
 
 <nav id="nav">
-  <a href="/" class="nav-logo"><h2 style="font-weight: 800; color: var(--charcoal); letter-spacing:-0.03em;">CleanMyPool</h2></a>
+  <a href="/" class="nav-wordmark">Clean<em>My</em>Pool</a>
   <ul class="nav-links">
     <li><a href="#how">How It Works</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#areas">Areas</a></li>
     <li><a href="/pool-tips.html">Pool Tips</a></li>
   </ul>
-  <div class="nav-cta">
+  <div class="nav-right">
     <a href="tel:+18135753535" class="nav-phone">813.575.3535</a>
     <a href="#signup" class="btn-nav">Start Service</a>
   </div>
 </nav>
 
-<main id="main-content">
+<main>
 
-<section class="hero">
-  <h1 class="hero-slogan reveal on">All you do is <span>swim.</span></h1>
-  <p class="hero-subtext reveal on reveal-delay-1">Tampa Bay's most effortless weekly pool service. No contracts. No hassle. Just perfect water.</p>
-  <a href="#signup" class="btn-hero reveal on reveal-delay-2">Start Your Service</a>
-</section>
-
-<div class="trust-strip">
-  <div class="trust-item"><span class="t-icon">✓</span> 5.0 Star Google Rating</div>
-  <div class="trust-item"><span class="t-icon">✓</span> No Contracts</div>
-  <div class="trust-item"><span class="t-icon">✓</span> Book in 60 Seconds</div>
-  <div class="trust-item"><span class="t-icon">✓</span> FL Licensed & Insured</div>
-</div>
-
-<section id="how">
-  <div class="section-inner">
-    <span class="label-tag reveal">Simple</span>
-    <h2 class="section-h reveal">Three steps to just swim.</h2>
-    <div class="card-grid">
-      <div class="clean-card reveal reveal-delay-1">
-        <div class="step-num">01</div>
-        <h3>Pick Your Plan</h3>
-        <p>Transparent flat pricing based on your setup. Screened or open pool, salt or chlorine. No surprises.</p>
-      </div>
-      <div class="clean-card reveal reveal-delay-2">
-        <div class="step-num">02</div>
-        <h3>Sign Up Online</h3>
-        <p>Fill in your details in under 60 seconds. No credit card required to get started today.</p>
-      </div>
-      <div class="clean-card reveal reveal-delay-3">
-        <div class="step-num">03</div>
-        <h3>We Start This Week</h3>
-        <p>We confirm your service day and show up every week — same day, same tech. You relax.</p>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
     </div>
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="section-inner">
-    <span class="label-tag reveal">Pricing</span>
-    <h2 class="section-h reveal">Transparent, flat monthly rates.</h2>
-    
-    <div class="card-grid">
-      <div class="clean-card reveal reveal-delay-1">
-        <div class="price-type">Screened · Salt</div>
-        <div class="price-title">Screened + Salt</div>
-        <div class="price-num">$165<sub>/mo</sub></div>
-        <ul class="price-feats">
-          <li>Water analysis & chemistry</li>
-          <li>Brush & net pool</li>
-          <li>Empty baskets</li>
-          <li>Monthly filter service</li>
-        </ul>
-        <a href="#signup" class="btn-price">Select Plan</a>
-      </div>
-
-      <div class="clean-card star reveal reveal-delay-2">
-        <div class="star-badge">Most Popular</div>
-        <div class="price-type">Open Pool · Salt</div>
-        <div class="price-title">Open Pool + Salt</div>
-        <div class="price-num">$185<sub>/mo</sub></div>
-        <ul class="price-feats">
-          <li>Water analysis & chemistry</li>
-          <li>Brush & net pool</li>
-          <li>Empty baskets</li>
-          <li>Monthly filter service</li>
-        </ul>
-        <a href="#signup" class="btn-price">Select Plan</a>
-      </div>
-
-      <div class="clean-card reveal reveal-delay-3">
-        <div class="price-type">Screened · Chlorine</div>
-        <div class="price-title">Screened + Chlorine</div>
-        <div class="price-num">$205<sub>/mo</sub></div>
-        <ul class="price-feats">
-          <li>Water analysis & chemistry</li>
-          <li>Brush & net pool</li>
-          <li>Empty baskets</li>
-          <li>Monthly filter service</li>
-        </ul>
-        <a href="#signup" class="btn-price">Select Plan</a>
-      </div>
+    <div class="hero-eyebrow">5.0 Stars · Tampa Bay's #1 Pool Service</div>
+    <h1 class="hero-headline reveal on">All you do<br>is <span class="accent">swim.</span></h1>
+    <p class="hero-sub reveal on d1">Tampa Bay's most effortless weekly pool service. No contracts. No hassle. Just perfect water — from $165/mo.</p>
+    <div class="hero-actions reveal on d2">
+      <a href="#signup" class="btn-hero">Start Your Service</a>
+      <a href="#pricing" class="hero-link">See pricing <span class="arrow">→</span></a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="included">
-  <div class="section-inner">
-    <span class="label-tag reveal">Every Visit</span>
-    <h2 class="section-h reveal">What we do while you relax.</h2>
-    <div class="card-grid">
-      <div class="clean-card reveal reveal-delay-1"><div class="inc-icon">🧪</div><h3>Water Analysis</h3><p>Full chemical panel every visit — pH, chlorine, alkalinity, calcium all dialed in perfectly.</p></div>
-      <div class="clean-card reveal reveal-delay-2"><div class="inc-icon">🧹</div><h3>Brush & Net</h3><p>Every surface brushed, every leaf netted. Your pool will be showroom clean after every visit.</p></div>
-      <div class="clean-card reveal reveal-delay-3"><div class="inc-icon">🔧</div><h3>Monthly Filter Care</h3><p>Filter cartridge cleaning or DE backwash included every month to ensure perfect flow.</p></div>
-    </div>
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="trust-item"><div class="t-dot"></div> 5.0 Google Rating</div>
+    <div class="trust-item"><div class="t-dot"></div> No Contracts</div>
+    <div class="trust-item"><div class="t-dot"></div> Book in 60 Seconds</div>
+    <div class="trust-item"><div class="t-dot"></div> FL Licensed & Insured</div>
+    <div class="trust-item"><div class="t-dot"></div> Serving Tampa Bay Since 2017</div>
   </div>
-</section>
 
-<section id="areas">
-  <div class="section-inner">
-    <span class="label-tag reveal">Service Areas</span>
-    <h2 class="section-h reveal">Tampa Bay coverage.</h2>
-    <div class="areas-scroll">
-      <a href="/areas/pool-cleaning-south-tampa.html" class="area-chip reveal"><span style="font-size:2rem;">🏙️</span><div class="area-name">South Tampa</div><div class="area-sub">Hyde Park · Palma Ceia</div></a>
-      <a href="/areas/pool-cleaning-westchase.html" class="area-chip reveal reveal-delay-1"><span style="font-size:2rem;">🌴</span><div class="area-name">Westchase</div><div class="area-sub">Citrus Park · Countryway</div></a>
-      <a href="/areas/pool-cleaning-carrollwood.html" class="area-chip reveal reveal-delay-2"><span style="font-size:2rem;">🌳</span><div class="area-name">Carrollwood</div><div class="area-sub">Village · Northdale</div></a>
-      <a href="/areas/pool-cleaning-lutz.html" class="area-chip reveal reveal-delay-3"><span style="font-size:2rem;">🏡</span><div class="area-name">Lutz</div><div class="area-sub">Land O' Lakes · Cheval</div></a>
-    </div>
-  </div>
-</section>
-
-<section id="signup">
-  <div class="section-inner">
-    <div class="signup-layout">
-      <div class="signup-left reveal">
-        <span class="label-tag">Get Started</span>
-        <h2 class="section-h" style="margin-bottom: 24px;">Ready to jump in?</h2>
-        <p>Fill out the form and we'll confirm your first service date within 1 business day. The fastest pool service signup in all of Florida.</p>
-        
-        <div class="signup-trust">
-          <div class="signup-trust-item"><span class="icon">✓</span> Signup takes under 60 seconds</div>
-          <div class="signup-trust-item"><span class="icon">✓</span> No contract — cancel any time</div>
-          <div class="signup-trust-item"><span class="icon">✓</span> Same day, same tech — every week</div>
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-inner">
+      <span class="eyebrow reveal">Simple Process</span>
+      <h2 class="section-title reveal">Three steps to<br><em>just swim.</em></h2>
+      <div class="card-grid">
+        <div class="card reveal d1">
+          <div class="step-num">01</div>
+          <h3>Pick Your Plan</h3>
+          <p>Transparent flat pricing based on your setup. Screened or open pool, salt or chlorine. No surprises, ever.</p>
+        </div>
+        <div class="card reveal d2">
+          <div class="step-num">02</div>
+          <h3>Sign Up Online</h3>
+          <p>Fill in your details in under 60 seconds. No credit card required to get started today.</p>
+        </div>
+        <div class="card reveal d3">
+          <div class="step-num">03</div>
+          <h3>We Start This Week</h3>
+          <p>We confirm your service day and show up every week — same day, same tech. You relax and swim.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="form-box reveal reveal-delay-1">
-        <form id="signup-form">
-          <div class="frow">
-            <div class="fgroup"><label for="fn">First Name</label><input type="text" id="fn" required></div>
-            <div class="fgroup"><label for="ln">Last Name</label><input type="text" id="ln" required></div>
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-inner">
+      <span class="eyebrow reveal">Pricing</span>
+      <h2 class="section-title reveal">Flat monthly rates.<br><em>No surprises.</em></h2>
+      <div class="price-grid">
+
+        <div class="price-card reveal d1">
+          <div class="price-tag">Screened · Salt</div>
+          <div class="price-name">Screened + Salt</div>
+          <div class="price-amount">$165<sub>/mo</sub></div>
+          <div class="price-period">Billed monthly · Cancel anytime</div>
+          <div class="price-divider"></div>
+          <ul class="price-feats">
+            <li>Water analysis & chemistry</li>
+            <li>Brush & net pool</li>
+            <li>Empty skimmer baskets</li>
+            <li>Monthly filter service</li>
+          </ul>
+          <a href="#signup" class="btn-price">Select Plan</a>
+        </div>
+
+        <div class="price-card featured reveal d2">
+          <div class="price-tag">Open Pool · Salt</div>
+          <div class="price-name">Open Pool + Salt</div>
+          <div class="price-amount">$185<sub>/mo</sub></div>
+          <div class="price-period">Billed monthly · Cancel anytime</div>
+          <div class="price-divider"></div>
+          <ul class="price-feats">
+            <li>Water analysis & chemistry</li>
+            <li>Brush & net pool</li>
+            <li>Empty skimmer baskets</li>
+            <li>Monthly filter service</li>
+          </ul>
+          <a href="#signup" class="btn-price">Select Plan</a>
+        </div>
+
+        <div class="price-card reveal d3">
+          <div class="price-tag">Screened · Chlorine</div>
+          <div class="price-name">Screened + Chlorine</div>
+          <div class="price-amount">$205<sub>/mo</sub></div>
+          <div class="price-period">Billed monthly · Cancel anytime</div>
+          <div class="price-divider"></div>
+          <ul class="price-feats">
+            <li>Water analysis & chemistry</li>
+            <li>Brush & net pool</li>
+            <li>Empty skimmer baskets</li>
+            <li>Monthly filter service</li>
+          </ul>
+          <a href="#signup" class="btn-price">Select Plan</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUDED -->
+  <section id="included">
+    <div class="section-inner">
+      <span class="eyebrow reveal">Every Visit</span>
+      <h2 class="section-title reveal">What we do while<br><em>you relax.</em></h2>
+      <div class="card-grid">
+        <div class="card reveal d1">
+          <span class="inc-icon">🧪</span>
+          <h3>Water Analysis</h3>
+          <p>Full chemical panel every visit — pH, chlorine, alkalinity, calcium, all dialed in to perfection.</p>
+        </div>
+        <div class="card reveal d2">
+          <span class="inc-icon">🧹</span>
+          <h3>Brush & Net</h3>
+          <p>Every wall brushed, every leaf netted. Your pool will look showroom-clean after every single visit.</p>
+        </div>
+        <div class="card reveal d3">
+          <span class="inc-icon">🔧</span>
+          <h3>Monthly Filter Care</h3>
+          <p>Filter cartridge cleaning or DE backwash included every month to maintain perfect water flow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS -->
+  <section id="areas">
+    <div class="section-inner">
+      <span class="eyebrow reveal">Service Areas</span>
+      <h2 class="section-title reveal">Tampa Bay<br><em>coverage.</em></h2>
+      <div class="areas-scroll">
+        <a href="/areas/pool-cleaning-south-tampa.html" class="area-chip reveal">
+          <div class="area-emoji">🏙️</div>
+          <div class="area-name">South Tampa</div>
+          <div class="area-sub">Hyde Park · Palma Ceia</div>
+        </a>
+        <a href="/areas/pool-cleaning-westchase.html" class="area-chip reveal d1">
+          <div class="area-emoji">🌴</div>
+          <div class="area-name">Westchase</div>
+          <div class="area-sub">Citrus Park · Countryway</div>
+        </a>
+        <a href="/areas/pool-cleaning-carrollwood.html" class="area-chip reveal d2">
+          <div class="area-emoji">🌳</div>
+          <div class="area-name">Carrollwood</div>
+          <div class="area-sub">Village · Northdale</div>
+        </a>
+        <a href="/areas/pool-cleaning-lutz.html" class="area-chip reveal d3">
+          <div class="area-emoji">🏡</div>
+          <div class="area-name">Lutz</div>
+          <div class="area-sub">Land O' Lakes · Cheval</div>
+        </a>
+        <a href="/areas/pool-cleaning-wesley-chapel.html" class="area-chip reveal">
+          <div class="area-emoji">🏘️</div>
+          <div class="area-name">Wesley Chapel</div>
+          <div class="area-sub">Zephyrhills · New Tampa</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section id="signup">
+    <div class="section-inner">
+      <div class="signup-layout">
+        <div class="signup-left reveal">
+          <span class="eyebrow">Get Started</span>
+          <h2 class="section-title" style="margin-bottom:20px;">Ready to<br><em>jump in?</em></h2>
+          <p>Fill out the form and we'll confirm your first service date within 1 business day — the fastest pool service signup in Florida.</p>
+          <div class="signup-trust">
+            <div class="signup-trust-item"><div class="t-dot"></div> Signup takes under 60 seconds</div>
+            <div class="signup-trust-item"><div class="t-dot"></div> No contract — cancel any time</div>
+            <div class="signup-trust-item"><div class="t-dot"></div> Same day, same tech — every week</div>
+            <div class="signup-trust-item"><div class="t-dot"></div> First visit confirmed within 24 hrs</div>
           </div>
-          <div class="frow">
-            <div class="fgroup"><label for="em">Email</label><input type="email" id="em" required></div>
-            <div class="fgroup"><label for="ph">Phone</label><input type="tel" id="ph" required></div>
-          </div>
-          <div class="frow">
-            <div class="fgroup full"><label for="addr">Service Address</label><input type="text" id="addr" required></div>
-          </div>
-          <div class="frow">
-            <div class="fgroup">
-              <label for="plan">Select Plan</label>
-              <select id="plan" required>
-                <option value="">Choose a plan...</option>
-                <option>Screened + Salt ($165/mo)</option>
-                <option>Open + Salt ($185/mo)</option>
-                <option>Screened + Chlorine ($205/mo)</option>
-                <option>Open + Chlorine (Quote)</option>
-              </select>
+        </div>
+
+        <div class="form-box reveal d1">
+          <div class="form-title">Start your service</div>
+          <form id="signup-form">
+            <div class="frow">
+              <div class="fgroup"><label for="fn">First Name</label><input type="text" id="fn" placeholder="First" required></div>
+              <div class="fgroup"><label for="ln">Last Name</label><input type="text" id="ln" placeholder="Last" required></div>
             </div>
-            <div class="fgroup"><label for="pt">Pool Type</label><select id="pt"><option>Pool Only</option><option>Pool + Spa Combo</option></select></div>
-          </div>
-          <p class="form-terms">By submitting you agree to our <a href="/terms-of-service.html">Terms of Service</a>. Month-to-month, no contracts.</p>
-          <button type="submit" class="btn-submit">Complete Signup</button>
-        </form>
+            <div class="frow">
+              <div class="fgroup"><label for="em">Email</label><input type="email" id="em" placeholder="you@email.com" required></div>
+              <div class="fgroup"><label for="ph">Phone</label><input type="tel" id="ph" placeholder="(813) 000-0000" required></div>
+            </div>
+            <div class="frow">
+              <div class="fgroup full"><label for="addr">Service Address</label><input type="text" id="addr" placeholder="123 Pool Lane, Tampa FL" required></div>
+            </div>
+            <div class="frow">
+              <div class="fgroup">
+                <label for="plan">Plan</label>
+                <select id="plan" required>
+                  <option value="">Choose a plan...</option>
+                  <option>Screened + Salt ($165/mo)</option>
+                  <option>Open + Salt ($185/mo)</option>
+                  <option>Screened + Chlorine ($205/mo)</option>
+                  <option>Open + Chlorine (Quote)</option>
+                </select>
+              </div>
+              <div class="fgroup">
+                <label for="pt">Pool Type</label>
+                <select id="pt">
+                  <option>Pool Only</option>
+                  <option>Pool + Spa Combo</option>
+                </select>
+              </div>
+            </div>
+            <p class="form-terms">By submitting you agree to our <a href="/terms-of-service.html">Terms of Service</a>. Month-to-month, no contracts.</p>
+            <button type="submit" class="btn-submit">Complete Signup →</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="reviews">
-  <div class="section-inner">
-    <span class="label-tag reveal">Reviews</span>
-    <h2 class="section-h reveal">Tampa families love us.</h2>
-    <div class="card-grid">
-      <div class="clean-card reveal reveal-delay-1">
-        <p class="r-text">"Our pool has never looked better. We've tried three other companies and CleanMyPool is on a completely different level. Worth every single penny."</p>
-        <div class="r-author">James W. — South Tampa</div>
-      </div>
-      <div class="clean-card reveal reveal-delay-2">
-        <p class="r-text">"The motto is real — I literally never think about my pool anymore. They text when they're coming, same day every week. Absolute professionals."</p>
-        <div class="r-author">Sarah M. — Westchase</div>
-      </div>
-      <div class="clean-card reveal reveal-delay-3">
-        <p class="r-text">"Signed up online in literally 60 seconds. Started service the same week. Pool has been crystal clear ever since. Highly recommend to any neighbor."</p>
-        <div class="r-author">Tom R. — Carrollwood</div>
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="section-inner">
+      <span class="eyebrow reveal">Reviews</span>
+      <h2 class="section-title reveal">Tampa families<br><em>love us.</em></h2>
+      <div class="card-grid">
+        <div class="review-card reveal d1">
+          <div class="stars">★★★★★</div>
+          <p class="r-text">"Our pool has never looked better. We've tried three other companies and CleanMyPool is on a completely different level. Worth every single penny."</p>
+          <div class="r-author">James W.</div>
+          <div class="r-location">South Tampa</div>
+        </div>
+        <div class="review-card reveal d2">
+          <div class="stars">★★★★★</div>
+          <p class="r-text">"The motto is real — I literally never think about my pool anymore. They text when they're coming, same day every week. Absolute professionals."</p>
+          <div class="r-author">Sarah M.</div>
+          <div class="r-location">Westchase</div>
+        </div>
+        <div class="review-card reveal d3">
+          <div class="stars">★★★★★</div>
+          <p class="r-text">"Signed up online in literally 60 seconds. Started service the same week. Pool has been crystal clear ever since. Highly recommend to any neighbor."</p>
+          <div class="r-author">Tom R.</div>
+          <div class="r-location">Carrollwood</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="faq">
-  <div class="section-inner" style="max-width: 800px;">
-    <span class="label-tag reveal">FAQ</span>
-    <h2 class="section-h reveal">Common questions.</h2>
-    <div class="reveal">
-      <div class="faq-item">
-        <div class="faq-q">Is this a contract? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>No. Our service agreement is month-to-month. You can cancel any time with zero penalty.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">How does billing work? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>We charge your card a few days before the start of each month. A card must be kept on file.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do I need to be home? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>No — most customers aren't home. We service on the same day every week so you can plan accordingly.</p></div>
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-inner" style="max-width: 760px;">
+      <span class="eyebrow reveal">FAQ</span>
+      <h2 class="section-title reveal">Common<br><em>questions.</em></h2>
+      <div class="reveal">
+        <div class="faq-item">
+          <div class="faq-q">Is this a contract? <div class="faq-icon">+</div></div>
+          <div class="faq-a"><p>No. Our service is month-to-month. You can cancel any time with zero penalty or fees.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How does billing work? <div class="faq-icon">+</div></div>
+          <div class="faq-a"><p>We charge your card a few days before the start of each month. A card must be kept on file.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I need to be home? <div class="faq-icon">+</div></div>
+          <div class="faq-a"><p>No — most customers aren't home. We service the same day every week so you can plan accordingly.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What areas do you serve? <div class="faq-icon">+</div></div>
+          <div class="faq-a"><p>We serve South Tampa, Westchase, Carrollwood, Lutz, Wesley Chapel, and surrounding Tampa Bay neighborhoods. Not sure if we cover your area? Call us.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What if my pool needs a repair? <div class="faq-icon">+</div></div>
+          <div class="faq-a"><p>Our sister company FixMyPool handles all repairs — equipment, plumbing, renovation, and more. We'll coordinate everything seamlessly for you.</p></div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+</main>
 
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <h2 style="font-weight: 800; color: var(--white); letter-spacing:-0.03em;">CleanMyPool</h2>
+      <div class="footer-wordmark">Clean<em>My</em>Pool</div>
       <p>Tampa Bay's easiest weekly pool cleaning. We handle everything so all you have to do is swim.</p>
-      <div class="footer-motto">All you do is swim.</div>
+      <div class="footer-motto">"All you do is swim."</div>
     </div>
     <div class="footer-col">
       <h5>Service</h5>
@@ -791,6 +1073,7 @@
         <li><a href="/areas/pool-cleaning-south-tampa.html">South Tampa</a></li>
         <li><a href="/areas/pool-cleaning-westchase.html">Westchase</a></li>
         <li><a href="/areas/pool-cleaning-carrollwood.html">Carrollwood</a></li>
+        <li><a href="/areas/pool-cleaning-lutz.html">Lutz</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -804,47 +1087,46 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 CleanMyPool LLC · Tampa, FL</span>
-    <div><a href="tel:+18135753535">813.575.3535</a></div>
+    <a href="tel:+18135753535">813.575.3535</a>
   </div>
 </footer>
 
-</main>
-
 <script>
-// Nav blur effect on scroll
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', scrollY > 50); });
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
 
-// FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if(!isOpen) item.classList.add('open');
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
   });
-});
 
-// Scroll reveal animations
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
-}, {threshold: 0.1});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if(el) { e.preventDefault(); el.scrollIntoView({behavior: 'smooth', block: 'start'}); }
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+    });
   });
-});
 
-// Form Submission (EmailJS Placeholder)
-document.getElementById('signup-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('Thank you! In a live environment, this would send your info via EmailJS.');
-});
+  // Form submit
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.querySelector('.btn-submit').textContent = '✓ Received — we\'ll be in touch!';
+    this.querySelector('.btn-submit').style.background = '#2DE7E1';
+    this.querySelector('.btn-submit').style.color = '#090C9B';
+  });
 </script>
 </body>
 </html>
