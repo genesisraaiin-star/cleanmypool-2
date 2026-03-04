@@ -48,6 +48,9 @@
     "geo": { "@type": "GeoCoordinates", "latitude": 27.9506, "longitude": -82.4572 }
   }</script>
 
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
@@ -92,6 +95,12 @@
     }
     nav.scrolled { padding: 12px 48px; }
     @media(max-width:768px){ nav, nav.scrolled { padding: 14px 20px; } }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
 
     .nav-wordmark {
       font-family: 'DM Serif Display', serif;
@@ -144,6 +153,14 @@
       inset: 0;
       z-index: 0;
       background: var(--white);
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.07;
+      z-index: 0;
     }
     .orb {
       position: absolute;
@@ -754,7 +771,9 @@
 <body>
 
 <nav id="nav">
-  <a href="/" class="nav-wordmark">Clean<em>My</em>Pool</a>
+  <a href="/" class="nav-logo">
+    <img src="/assets/logo.png" alt="CleanMyPool" height="36">
+  </a>
   <ul class="nav-links">
     <li><a href="#how">How It Works</a></li>
     <li><a href="#pricing">Pricing</a></li>
@@ -772,6 +791,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg">
+      <img src="/assets/hero-bg.jpg" class="hero-img" alt="Beautiful clean pool Tampa Bay">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
       <div class="orb orb-3"></div>
