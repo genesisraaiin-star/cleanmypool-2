@@ -798,7 +798,7 @@
   // ── PDF GENERATION ──
   async function generatePDF(data, sigDataURL) {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+    const doc = new jsPDF({ unit: 'pt', format: 'letter', compress: true });
 
     const margin = 60;
     const pageW  = doc.internal.pageSize.getWidth();
@@ -885,7 +885,7 @@
 
     // Insert signature image
     try {
-      doc.addImage(sigDataURL, 'PNG', margin, y, 200, 56);
+      doc.addImage(sigDataURL, 'JPEG', margin, y, 200, 56);
     } catch(e) {}
     y += 70;
 
@@ -935,7 +935,7 @@
     btn.innerHTML = '<span class="spinner"></span>Generating & Sending...';
 
     try {
-      const sigDataURL = canvas.toDataURL('image/png');
+      const sigDataURL = canvas.toDataURL('image/jpeg', 0.5);
       const data = { firstName, lastName, email, phone, address, access, plan: planEl.value, initials };
 
       const pdfDataURI = await generatePDF(data, sigDataURL);
