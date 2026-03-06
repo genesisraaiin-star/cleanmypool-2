@@ -939,7 +939,7 @@
       const data = { firstName, lastName, email, phone, address, access, plan: planEl.value, initials };
 
       const pdfDataURI = await generatePDF(data, sigDataURL);
-      const pdfBase64  = pdfDataURI.split(',')[1];
+      const fileName   = `CleanMyPool_Agreement_${firstName}_${lastName}_${today.getFullYear()}.pdf`;
 
       // Send via EmailJS
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
@@ -951,7 +951,7 @@
         service_plan:   planEl.value,
         client_initials:initials,
         signed_date:    dateStr,
-        pdf_attachment: pdfBase64,
+        pdf_attachment: { name: fileName, data: pdfDataURI },
         to_email:       email,
       });
 
