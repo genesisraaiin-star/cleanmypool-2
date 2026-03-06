@@ -1378,18 +1378,17 @@
 
     // ── Review cards ────────────────────────────────────────────────────────
     grid.innerHTML = data.reviews.map((r, i) => {
-      const stars   = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+      const starStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
       const initial = r.author ? r.author.charAt(0).toUpperCase() : '?';
       const avatar  = r.photo
         ? `<img class="r-avatar" src="${r.photo}" alt="${r.author}" loading="lazy">`
         : `<div class="r-avatar-placeholder">${initial}</div>`;
 
-      // Trim long reviews
       const maxLen = 220;
       const text   = r.text.length > maxLen ? r.text.slice(0, maxLen).trim() + '…' : r.text;
 
       return `
-        <div class="review-card reveal" style="animation-delay:${i * 0.08}s">
+        <div class="review-card" style="opacity:1;animation-delay:${i * 0.08}s">
           <div class="r-meta">
             ${avatar}
             <div class="r-name-wrap">
@@ -1397,7 +1396,7 @@
               <div class="r-time">${r.time}</div>
             </div>
           </div>
-          <div class="stars" style="margin-bottom:14px;font-size:1rem;color:var(--teal)">${stars}</div>
+          <div class="stars" style="margin-bottom:14px;font-size:1rem;color:var(--teal)">${starStr}</div>
           <p class="r-text">"${text}"</p>
         </div>`;
     }).join('');
