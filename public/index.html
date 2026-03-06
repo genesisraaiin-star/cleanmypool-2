@@ -767,6 +767,8 @@
     .d2 { transition-delay: 0.16s; }
     .d3 { transition-delay: 0.24s; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("8AZcPyaE3LqYBe1o6");</script>
 </head>
 <body>
 
@@ -827,13 +829,13 @@
         </div>
         <div class="card reveal d2">
           <div class="step-num">02</div>
-          <h3>Sign Up Online</h3>
-          <p>Fill in your details in under 60 seconds. No credit card required to get started today.</p>
+          <h3>Sign Up &amp; Add a Card</h3>
+          <p>No contracts — ever. We collect payment at the start of each month with a card on file. Need to cancel? Just let us know before the month ends and you're all set.</p>
         </div>
         <div class="card reveal d3">
           <div class="step-num">03</div>
-          <h3>We Start This Week</h3>
-          <p>We confirm your service day and show up every week — same day, same tech. You relax and swim.</p>
+          <h3>Just Swim</h3>
+          <p>We confirm your service day and show up every week — same day, same tech. You do nothing but enjoy a clean pool.</p>
         </div>
       </div>
     </div>
@@ -1070,6 +1072,22 @@
     </div>
   </section>
 
+  <!-- FIXMYPOOL PROMO -->
+  <section id="fixmypool-promo" style="background: #fff; border-top: 1px solid #E2E8F0; padding: 80px 40px;">
+    <div style="max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 260px;">
+        <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #0891B2; margin-bottom: 12px;">Our Sister Company</div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: #090C9B; line-height: 1.15; margin: 0 0 16px;">Need a repair<br>or renovation?</h2>
+        <p style="color: #555; font-size: 1rem; line-height: 1.7; max-width: 420px; margin: 0 0 12px;">From broken equipment and plumbing fixes to full pool renovations and resurfacing — <strong style="color:#090C9B;">FixMyPool.pro</strong> handles it all. Licensed, insured, and trusted across Tampa Bay.</p>
+        <p style="color: #aaa; font-size: 0.85rem; margin: 0;">CPC1460147 &nbsp;·&nbsp; San Juan Pools Authorized Dealer</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+        <a href="https://fixmypool.pro" target="_blank" rel="noopener" style="display: inline-block; background: #090C9B; color: #fff; font-weight: 800; font-size: 1rem; padding: 16px 36px; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Visit FixMyPool.pro →</a>
+        <span style="color: #aaa; font-size: 0.8rem; padding-left: 4px;">Repairs · Renovations · New Builds</span>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -1140,12 +1158,38 @@
     });
   });
 
-  // Form submit
+  // Form submit — EmailJS
   document.getElementById('signup-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    this.querySelector('.btn-submit').textContent = '✓ Received — we\'ll be in touch!';
-    this.querySelector('.btn-submit').style.background = '#2DE7E1';
-    this.querySelector('.btn-submit').style.color = '#090C9B';
+    const btn = this.querySelector('.btn-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const templateParams = {
+      name:    document.getElementById('fn').value + ' ' + document.getElementById('ln').value,
+      email:   document.getElementById('em').value,
+      phone:   document.getElementById('ph').value,
+      address: document.getElementById('addr').value,
+      plan:    document.getElementById('plan').value,
+      pool_type: document.getElementById('pt').value,
+      message: `Plan: ${document.getElementById('plan').value} | Pool Type: ${document.getElementById('pt').value} | Address: ${document.getElementById('addr').value} | Phone: ${document.getElementById('ph').value}`,
+      title:   'New CleanMyPool Signup'
+    };
+
+    emailjs.send('service_jpg744s', 'template_kgq0lzo', templateParams)
+      .then(() => {
+        btn.textContent = '✓ Received — we\'ll be in touch!';
+        btn.style.background = '#2DE7E1';
+        btn.style.color = '#090C9B';
+        document.getElementById('signup-form').reset();
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
+        btn.textContent = 'Something went wrong — try again';
+        btn.style.background = '#e53e3e';
+        btn.style.color = '#fff';
+        btn.disabled = false;
+      });
   });
 </script>
 </body>
