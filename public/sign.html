@@ -962,10 +962,11 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch(err) {
-      console.error(err);
+      console.error('EmailJS full error:', JSON.stringify(err));
       btn.disabled = false;
       btn.innerHTML = 'Submit Signed Agreement';
-      showError('Something went wrong sending the agreement. Please try again or call us at (813) 575-3535.');
+      const errDetail = err?.text || err?.message || JSON.stringify(err);
+      showError('Error: ' + errDetail);
     }
   }
 
