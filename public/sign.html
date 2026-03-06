@@ -951,7 +951,7 @@
         service_plan:   planEl.value,
         client_initials:initials,
         signed_date:    dateStr,
-        pdf_attachment: { name: fileName, data: pdfDataURI },
+        pdf_attachment: pdfDataURI.replace('data:application/octet-stream', 'data:application/pdf').replace('data:binary/octet-stream', 'data:application/pdf'),
         to_email:       email,
       });
 
