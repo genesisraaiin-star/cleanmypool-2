@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     // Only return 5-star reviews with meaningful text
     const reviews = (place.reviews || [])
-      .filter(r => r.rating >= 4 && r.text && r.text.length > 40)
+      .filter(r => r.rating >= 4 && r.text && r.text.length > 10)
       .slice(0, 6)
       .map(r => ({
         author: r.author_name,
