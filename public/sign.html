@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Agreement | CleanMyPool</title>
+  <meta name="robots" content="noindex,nofollow">
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --logo:       #78C0D0;
+      --aqua:       #1A8FA8;
+      --aqua-light: #7FD4E0;
+      --aqua-dark:  #0D5F78;
+      --midnight:   #062C3E;
+      --lagoon:     #2EA8BF;
+      --foam:       #C8EEF4;
+      --mist:       #E8F9FC;
+      --off:        #F0FBFD;
+      --text:       #062C3E;
+      --muted:      #4A7A8A;
+      --white:      #FFFFFF;
+      --border:     rgba(26,143,168,0.18);
+      --shadow:     0 4px 24px rgba(6,44,62,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--off);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--midnight);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--aqua-light);
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.78rem;
+      color: var(--foam);
+      opacity: 0.6;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-back:hover { opacity: 1; }
+
+    /* ── HERO STRIP ── */
+    .page-header {
+      background: linear-gradient(135deg, var(--midnight) 0%, var(--aqua-dark) 100%);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .page-header .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--aqua-light);
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+    }
+    .page-header p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--foam);
+      opacity: 0.75;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── STEPS INDICATOR ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 28px 0 32px;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--foam);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      transition: all 0.3s;
+    }
+    .step.active .step-num {
+      background: var(--aqua);
+      border-color: var(--aqua);
+      color: white;
+    }
+    .step.done .step-num {
+      background: var(--lagoon);
+      border-color: var(--lagoon);
+      color: white;
+    }
+    .step-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .step.active .step-label { color: var(--aqua); }
+    .step-line {
+      width: 60px;
+      height: 2px;
+      background: var(--border);
+      margin-bottom: 22px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .card-header {
+      background: linear-gradient(90deg, var(--midnight) 0%, var(--aqua-dark) 100%);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-header .icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(127,212,224,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .card-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      font-weight: 700;
+    }
+    .card-body { padding: 24px; }
+
+    /* ── FORM ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .field input, .field select, .field textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--off);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--aqua);
+      box-shadow: 0 0 0 3px rgba(26,143,168,0.1);
+      background: white;
+    }
+    .field textarea { resize: vertical; min-height: 72px; }
+
+    /* ── PLAN SELECTOR ── */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .plan-option { display: none; }
+    .plan-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--off);
+    }
+    .plan-label:hover { border-color: var(--aqua); background: var(--mist); }
+    .plan-option:checked + .plan-label {
+      border-color: var(--aqua);
+      background: linear-gradient(135deg, var(--mist), var(--foam));
+      box-shadow: 0 0 0 3px rgba(26,143,168,0.1);
+    }
+    .plan-name { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+    .plan-price { font-size: 1.1rem; font-weight: 900; color: var(--aqua); }
+    .plan-desc { font-size: 0.72rem; color: var(--muted); }
+
+    /* ── AGREEMENT TEXT ── */
+    .agreement-scroll {
+      background: var(--off);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      max-height: 320px;
+      overflow-y: auto;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    .agreement-scroll::-webkit-scrollbar { width: 4px; }
+    .agreement-scroll::-webkit-scrollbar-track { background: var(--foam); }
+    .agreement-scroll::-webkit-scrollbar-thumb { background: var(--aqua-light); border-radius: 2px; }
+
+    .agreement-scroll h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--aqua-dark);
+      margin: 14px 0 6px;
+    }
+    .agreement-scroll h3:first-child { margin-top: 0; }
+    .agreement-scroll p { margin-bottom: 8px; }
+
+    .scroll-notice {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* ── SIGNATURE ── */
+    .sig-wrap {
+      position: relative;
+    }
+    #sig-canvas {
+      width: 100%;
+      height: 160px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      cursor: crosshair;
+      touch-action: none;
+      display: block;
+    }
+    #sig-canvas.has-sig { border-color: var(--aqua); }
+    .sig-guide {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: var(--muted);
+      pointer-events: none;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+    .sig-guide.hidden { opacity: 0; }
+    .sig-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+    .btn-clear {
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .btn-clear:hover { color: var(--aqua); background: var(--mist); }
+
+    /* ── INITIALS ── */
+    .initials-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--mist);
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      margin-top: 16px;
+    }
+    .initials-row input {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      width: 80px;
+      padding: 8px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      color: var(--text);
+      text-align: center;
+      outline: none;
+    }
+    .initials-row input:focus {
+      border-color: var(--aqua);
+      box-shadow: 0 0 0 3px rgba(26,143,168,0.1);
+    }
+    .initials-text { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+    .initials-text strong { color: var(--text); }
+
+    /* ── CHECKBOX ── */
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 1px;
+      accent-color: var(--aqua);
+      cursor: pointer;
+    }
+    .checkbox-row label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .checkbox-row label strong { color: var(--text); }
+
+    /* ── SUBMIT ── */
+    .submit-area { padding-top: 8px; }
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--aqua-dark) 0%, var(--aqua) 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(26,143,168,0.35);
+    }
+    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(26,143,168,0.45); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+    .submit-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .success-screen.visible { display: block; }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, var(--aqua-dark), var(--aqua));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2rem;
+    }
+    .success-screen h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--midnight);
+      margin-bottom: 12px;
+    }
+    .success-screen p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto 8px;
+      line-height: 1.6;
+    }
+
+    /* ── ERROR ── */
+    .error-msg {
+      display: none;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      margin-top: 12px;
+    }
+    .error-msg.visible { display: block; }
+
+    /* ── LOADING ── */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 560px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .plan-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://cleanmypool.us" class="nav-logo">CleanMyPool</a>
+    <a href="https://cleanmypool.us" class="nav-back">← Back to site</a>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="eyebrow">✦ New Client Onboarding</div>
+    <h1>Service Agreement</h1>
+    <p>Review, sign, and submit — takes about 2 minutes.</p>
+  </div>
+
+  <div class="container">
+
+    <!-- STEPS -->
+    <div class="steps">
+      <div class="step active" id="step1">
+        <div class="step-num">1</div>
+        <div class="step-label">Your Info</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step2">
+        <div class="step-num">2</div>
+        <div class="step-label">Agreement</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step3">
+        <div class="step-num">3</div>
+        <div class="step-label">Sign</div>
+      </div>
+    </div>
+
+    <!-- SUCCESS SCREEN (hidden by default) -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">✓</div>
+      <h2>You're all set.</h2>
+      <p>Your signed agreement has been sent to <strong id="confirm-email"></strong> and to our team.</p>
+      <p style="margin-top:16px;">We'll confirm your first service date within 1 business day. Welcome to CleanMyPool — <em>all you do is swim.</em></p>
+    </div>
+
+    <!-- FORM CARD -->
+    <div id="main-form">
+
+      <!-- SECTION 1: CLIENT INFO -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">👤</div>
+          <h2>Client Information</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="field">
+              <label>First Name *</label>
+              <input type="text" id="first-name" placeholder="John" required>
+            </div>
+            <div class="field">
+              <label>Last Name *</label>
+              <input type="text" id="last-name" placeholder="Smith" required>
+            </div>
+            <div class="field">
+              <label>Email Address *</label>
+              <input type="email" id="email" placeholder="john@email.com" required>
+            </div>
+            <div class="field">
+              <label>Phone Number *</label>
+              <input type="tel" id="phone" placeholder="(813) 000-0000" required>
+            </div>
+            <div class="field full">
+              <label>Service Address *</label>
+              <input type="text" id="address" placeholder="1234 Palm Dr, Tampa, FL 33629" required>
+            </div>
+            <div class="field full">
+              <label>Gate Code / Access Notes</label>
+              <input type="text" id="access" placeholder="Gate code #1234, dog in backyard on Tuesdays...">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: PLAN SELECTION -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">🏊</div>
+          <h2>Your Service Plan</h2>
+        </div>
+        <div class="card-body">
+          <div class="plan-grid">
+            <div>
+              <input type="radio" name="plan" id="plan1" class="plan-option" value="Screened Pool + Salt System — $165/mo">
+              <label for="plan1" class="plan-label">
+                <span class="plan-price">$165<span style="font-size:0.7rem;font-weight:500">/mo</span></span>
+                <span class="plan-name">Screened + Salt</span>
+                <span class="plan-desc">Enclosed pool, salt system</span>
+              </label>
+            </div>
+            <div>
+              <input type="radio" name="plan" id="plan2" class="plan-option" value="Open Pool + Salt System — $185/mo">
+              <label for="plan2" class="plan-label">
+                <span class="plan-price">$185<span style="font-size:0.7rem;font-weight:500">/mo</span></span>
+                <span class="plan-name">Open + Salt</span>
+                <span class="plan-desc">No enclosure, salt system</span>
+              </label>
+            </div>
+            <div>
+              <input type="radio" name="plan" id="plan3" class="plan-option" value="Screened Pool + Chlorine — $205/mo">
+              <label for="plan3" class="plan-label">
+                <span class="plan-price">$205<span style="font-size:0.7rem;font-weight:500">/mo</span></span>
+                <span class="plan-name">Screened + Chlorine</span>
+                <span class="plan-desc">Enclosed pool, chlorine</span>
+              </label>
+            </div>
+            <div>
+              <input type="radio" name="plan" id="plan4" class="plan-option" value="Open Pool + Chlorine — $225/mo">
+              <label for="plan4" class="plan-label">
+                <span class="plan-price">$225<span style="font-size:0.7rem;font-weight:500">/mo</span></span>
+                <span class="plan-name">Open + Chlorine</span>
+                <span class="plan-desc">No enclosure, chlorine</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: AGREEMENT -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">📋</div>
+          <h2>Service Agreement</h2>
+        </div>
+        <div class="card-body">
+          <div class="agreement-scroll" id="agreement-text">
+            <h3>CleanMyPool LLC — Pool Service Agreement</h3>
+            <p>This Pool Service Agreement ("Agreement") is entered into between CleanMyPool LLC ("Company") and the client identified above ("Client"). By signing below, Client agrees to all terms stated herein.</p>
+
+            <h3>1. Services Provided</h3>
+            <p>Company will perform weekly pool cleaning services at the service address provided. Each visit includes: water testing and chemical balancing, brushing pool walls and floor, netting and skimming debris, emptying pump and skimmer baskets, and visual inspection of pool equipment. Monthly services include filter cleaning (cartridge rinse or DE backwash as applicable).</p>
+
+            <h3>2. Service Schedule</h3>
+            <p>Service is performed once per week on a consistent assigned day. Client will be notified of their service day prior to first visit. Company will provide advance notice for any schedule changes. Client does not need to be present during service.</p>
+
+            <h3>3. Pricing & Billing</h3>
+            <p>Client agrees to the monthly flat rate selected above. Billing occurs at the beginning of each service month. A valid credit card must be kept on file for automatic billing. Returned payments are subject to a $25 returned payment fee. Pricing is subject to change with 30 days written notice.</p>
+
+            <h3>4. Month-to-Month / No Contract</h3>
+            <p>This Agreement is month-to-month with no long-term commitment. Either party may cancel with reasonable notice. No cancellation fee is charged. Client may cancel by phone, text, or email at any time.</p>
+
+            <h3>5. Access & Site Conditions</h3>
+            <p>Client grants Company and its contractors reasonable access to the pool area on the scheduled service day. Client is responsible for ensuring safe, unobstructed access. Client must disclose any known hazards including aggressive pets, unmarked steps, or unstable surfaces. Company is not liable for damage caused by pre-existing conditions or lack of disclosed access issues.</p>
+
+            <h3>6. Minor Repairs</h3>
+            <p>Company technicians may perform minor repairs (under $75 value) without prior authorization to maintain pool safety and equipment function. Repairs exceeding this threshold require Client approval before work is performed. Client will be notified of any recommended repairs observed during service visits.</p>
+
+            <h3>7. Chemical Responsibility</h3>
+            <p>Company provides all pool chemicals as part of the monthly service rate. Company is not responsible for algae blooms, water problems, or chemical imbalances caused by external contamination (heavy storms, bather load, wildlife, etc.) between scheduled visits. Additional service calls are available at an hourly rate.</p>
+
+            <h3>8. Limitation of Liability</h3>
+            <p>Company's liability is limited to the cost of services rendered in the current month. Company is not liable for pre-existing equipment damage, acts of nature, or circumstances beyond its reasonable control. Company carries general liability insurance; certificate available upon request.</p>
+
+            <h3>9. Disputes</h3>
+            <p>Any disputes arising from this Agreement shall be resolved by good-faith negotiation. Governing law: State of Florida. Venue: Hillsborough County.</p>
+
+            <h3>10. Agreement Acceptance</h3>
+            <p>By signing below, Client acknowledges they have read, understood, and agree to the terms of this Agreement. Electronic signatures are legally binding under the ESIGN Act and Florida Electronic Signature Act.</p>
+          </div>
+          <p class="scroll-notice">↑ Scroll to read full agreement before signing</p>
+
+          <!-- INITIALS -->
+          <div class="initials-row">
+            <input type="text" id="initials" maxlength="4" placeholder="AB">
+            <div class="initials-text">
+              <strong>Initial here to confirm you have read and understood the agreement above.</strong><br>
+              Your initials + full signature below constitute your legal acceptance.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: SIGNATURE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">✍️</div>
+          <h2>Sign Here</h2>
+        </div>
+        <div class="card-body">
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:14px;">Draw your signature below using your mouse or finger.</p>
+          <div class="sig-wrap">
+            <canvas id="sig-canvas" width="720" height="160"></canvas>
+            <div class="sig-guide" id="sig-guide">Sign here →</div>
+          </div>
+          <div class="sig-actions">
+            <button class="btn-clear" onclick="clearSignature()">✕ Clear</button>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="agree-check">
+            <label for="agree-check">
+              I, <strong id="name-preview">[your name]</strong>, agree this electronic signature is legally binding and constitutes my acceptance of the CleanMyPool LLC Service Agreement dated <strong id="date-preview"></strong>.
+            </label>
+          </div>
+
+          <div class="submit-area" style="margin-top:20px;">
+            <button class="btn-submit" id="submit-btn" onclick="submitAgreement()">
+              Submit Signed Agreement
+            </button>
+            <div class="error-msg" id="error-msg"></div>
+            <p class="submit-note">A copy of this signed agreement will be emailed to you and to CleanMyPool.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-form -->
+
+  </div><!-- /container -->
+
+
+<script>
+  // ── EMAILJS CONFIG ──
+  const EMAILJS_PUBLIC_KEY  = '8AZcPyaE3LqYBe1o6';
+  const EMAILJS_SERVICE_ID  = 'service_jpg744s';
+  const EMAILJS_TEMPLATE_ID = 'template_54q00r7';
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ── SET TODAY'S DATE ──
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('date-preview').textContent = dateStr;
+
+  // ── LIVE NAME PREVIEW ──
+  ['first-name','last-name'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateNamePreview);
+  });
+  function updateNamePreview() {
+    const f = document.getElementById('first-name').value;
+    const l = document.getElementById('last-name').value;
+    const full = [f, l].filter(Boolean).join(' ');
+    document.getElementById('name-preview').textContent = full || '[your name]';
+  }
+
+  // ── STEP INDICATOR ──
+  function updateSteps() {
+    const hasInfo = document.getElementById('first-name').value &&
+                    document.getElementById('email').value &&
+                    document.getElementById('address').value;
+    const hasPlan = document.querySelector('input[name="plan"]:checked');
+    const hasInit = document.getElementById('initials').value.trim().length >= 1;
+    const hasSig  = sigHasContent;
+
+    document.getElementById('step1').className = 'step ' + (hasInfo ? 'done' : 'active');
+    document.getElementById('step2').className = 'step ' + (hasPlan && hasInit ? 'done' : hasInfo ? 'active' : '');
+    document.getElementById('step3').className = 'step ' + (hasSig ? 'done' : (hasPlan && hasInit ? 'active' : ''));
+  }
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('change', updateSteps);
+    el.addEventListener('input', updateSteps);
+  });
+
+  // ── SIGNATURE CANVAS ──
+  const canvas  = document.getElementById('sig-canvas');
+  const ctx     = canvas.getContext('2d');
+  const guide   = document.getElementById('sig-guide');
+  let drawing   = false;
+  let sigHasContent = false;
+
+  function resizeCanvas() {
+    const w = canvas.offsetWidth;
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.width  = w;
+    canvas.height = 160;
+    ctx.putImageData(imgData, 0, 0);
+    ctx.strokeStyle = '#062C3E';
+    ctx.lineWidth   = 2.2;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / r.width;
+    const scaleY = canvas.height / r.height;
+    if (e.touches) {
+      return {
+        x: (e.touches[0].clientX - r.left) * scaleX,
+        y: (e.touches[0].clientY - r.top) * scaleY
+      };
+    }
+    return {
+      x: (e.clientX - r.left) * scaleX,
+      y: (e.clientY - r.top) * scaleY
+    };
+  }
+
+  canvas.addEventListener('mousedown',  e => { drawing = true; ctx.beginPath(); const p = getPos(e); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('mousemove',  e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); setSigContent(); });
+  canvas.addEventListener('mouseup',    () => { drawing = false; });
+  canvas.addEventListener('mouseleave', () => { drawing = false; });
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; ctx.beginPath(); const p = getPos(e); ctx.moveTo(p.x, p.y); }, { passive: false });
+  canvas.addEventListener('touchmove',  e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); setSigContent(); }, { passive: false });
+  canvas.addEventListener('touchend',   () => { drawing = false; });
+
+  function setSigContent() {
+    sigHasContent = true;
+    canvas.classList.add('has-sig');
+    guide.classList.add('hidden');
+    updateSteps();
+  }
+
+  function clearSignature() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    sigHasContent = false;
+    canvas.classList.remove('has-sig');
+    guide.classList.remove('hidden');
+    updateSteps();
+  }
+
+  // ── PDF GENERATION ──
+  async function generatePDF(data, sigDataURL) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+
+    const margin = 60;
+    const pageW  = doc.internal.pageSize.getWidth();
+    const pageH  = doc.internal.pageSize.getHeight();
+    let y = margin;
+
+    const addText = (text, size, style, color, indent) => {
+      doc.setFontSize(size);
+      doc.setFont('helvetica', style || 'normal');
+      doc.setTextColor(...(color || [6, 44, 62]));
+      const lines = doc.splitTextToSize(text, pageW - margin * 2 - (indent || 0));
+      lines.forEach(line => {
+        if (y > pageH - 60) { doc.addPage(); y = margin; }
+        doc.text(line, margin + (indent || 0), y);
+        y += size * 1.45;
+      });
+      return y;
+    };
+
+    // Header
+    doc.setFillColor(6, 44, 62);
+    doc.rect(0, 0, pageW, 72, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.setTextColor(127, 212, 224);
+    doc.text('CleanMyPool LLC', margin, 38);
+    doc.setFontSize(10);
+    doc.setTextColor(200, 238, 244);
+    doc.text('Pool Service Agreement', margin, 56);
+    doc.setFontSize(10);
+    doc.setTextColor(200, 238, 244);
+    doc.text(dateStr, pageW - margin, 56, { align: 'right' });
+    y = 100;
+
+    // Client info box
+    doc.setFillColor(240, 251, 253);
+    doc.roundedRect(margin, y, pageW - margin * 2, 100, 6, 6, 'F');
+    doc.setDrawColor(26, 143, 168);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(margin, y, pageW - margin * 2, 100, 6, 6, 'S');
+    y += 16;
+    addText('CLIENT INFORMATION', 8, 'bold', [26, 143, 168]);
+    y -= 4;
+    addText(`${data.firstName} ${data.lastName}`, 11, 'bold');
+    addText(`${data.email}   |   ${data.phone}`, 9, 'normal', [74, 122, 138]);
+    addText(`${data.address}`, 9, 'normal', [74, 122, 138]);
+    if (data.access) addText(`Access: ${data.access}`, 9, 'normal', [74, 122, 138]);
+    addText(`Plan: ${data.plan}`, 9, 'bold', [26, 143, 168]);
+    y += 16;
+
+    // Agreement sections
+    const sections = [
+      ['CleanMyPool LLC — Pool Service Agreement', 'This Pool Service Agreement ("Agreement") is entered into between CleanMyPool LLC ("Company") and the client identified above ("Client"). By signing below, Client agrees to all terms stated herein.'],
+      ['1. Services Provided', 'Company will perform weekly pool cleaning services at the service address provided. Each visit includes: water testing and chemical balancing, brushing pool walls and floor, netting and skimming debris, emptying pump and skimmer baskets, and visual inspection of pool equipment. Monthly services include filter cleaning (cartridge rinse or DE backwash as applicable).'],
+      ['2. Service Schedule', 'Service is performed once per week on a consistent assigned day. Client will be notified of their service day prior to first visit. Company will provide advance notice for any schedule changes. Client does not need to be present during service.'],
+      ['3. Pricing & Billing', 'Client agrees to the monthly flat rate selected above. Billing occurs at the beginning of each service month. A valid credit card must be kept on file for automatic billing. Returned payments are subject to a $25 returned payment fee. Pricing is subject to change with 30 days written notice.'],
+      ['4. Month-to-Month / No Contract', 'This Agreement is month-to-month with no long-term commitment. Either party may cancel with reasonable notice. No cancellation fee is charged. Client may cancel by phone, text, or email at any time.'],
+      ['5. Access & Site Conditions', 'Client grants Company and its contractors reasonable access to the pool area on the scheduled service day. Client is responsible for ensuring safe, unobstructed access. Client must disclose any known hazards including aggressive pets, unmarked steps, or unstable surfaces. Company is not liable for damage caused by pre-existing conditions or lack of disclosed access issues.'],
+      ['6. Minor Repairs', 'Company technicians may perform minor repairs (under $75 value) without prior authorization to maintain pool safety and equipment function. Repairs exceeding this threshold require Client approval before work is performed.'],
+      ['7. Chemical Responsibility', 'Company provides all pool chemicals as part of the monthly service rate. Company is not responsible for algae blooms, water problems, or chemical imbalances caused by external contamination (heavy storms, bather load, wildlife, etc.) between scheduled visits.'],
+      ['8. Limitation of Liability', "Company's liability is limited to the cost of services rendered in the current month. Company is not liable for pre-existing equipment damage, acts of nature, or circumstances beyond its reasonable control."],
+      ['9. Disputes', 'Any disputes arising from this Agreement shall be resolved by good-faith negotiation. Governing law: State of Florida. Venue: Hillsborough County.'],
+      ['10. Agreement Acceptance', 'By signing below, Client acknowledges they have read, understood, and agree to the terms of this Agreement. Electronic signatures are legally binding under the ESIGN Act and Florida Electronic Signature Act.'],
+    ];
+
+    sections.forEach(([title, body]) => {
+      addText(title, 9, 'bold', [13, 95, 120]);
+      y -= 2;
+      addText(body, 9, 'normal', [6, 44, 62]);
+      y += 4;
+    });
+
+    // Signature section
+    y += 12;
+    if (y > pageH - 180) { doc.addPage(); y = margin; }
+
+    doc.setDrawColor(200, 238, 244);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, pageW - margin, y);
+    y += 20;
+
+    addText('SIGNATURE', 8, 'bold', [26, 143, 168]);
+    y += 4;
+
+    // Insert signature image
+    try {
+      doc.addImage(sigDataURL, 'PNG', margin, y, 200, 56);
+    } catch(e) {}
+    y += 70;
+
+    addText(`${data.firstName} ${data.lastName}   |   Initials: ${data.initials}   |   Date: ${dateStr}`, 9, 'normal', [74, 122, 138]);
+    y += 8;
+    addText('Signed electronically via cleanmypool.us/sign', 8, 'normal', [26, 143, 168]);
+
+    // Footer
+    doc.setFillColor(6, 44, 62);
+    doc.rect(0, pageH - 36, pageW, 36, 'F');
+    doc.setFontSize(8);
+    doc.setTextColor(200, 238, 244);
+    doc.text('CleanMyPool LLC  |  cleanmypool.us  |  (813) 575-3535  |  cleanmypool.fl@gmail.com', pageW / 2, pageH - 14, { align: 'center' });
+
+    return doc.output('datauristring');
+  }
+
+  // ── SUBMIT ──
+  async function submitAgreement() {
+    const btn = document.getElementById('submit-btn');
+    const errEl = document.getElementById('error-msg');
+    errEl.className = 'error-msg';
+
+    // Collect values
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName  = document.getElementById('last-name').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const address   = document.getElementById('address').value.trim();
+    const access    = document.getElementById('access').value.trim();
+    const planEl    = document.querySelector('input[name="plan"]:checked');
+    const initials  = document.getElementById('initials').value.trim();
+    const agreed    = document.getElementById('agree-check').checked;
+
+    // Validation
+    if (!firstName || !lastName)  return showError('Please enter your full name.');
+    if (!email)                   return showError('Please enter your email address.');
+    if (!phone)                   return showError('Please enter your phone number.');
+    if (!address)                 return showError('Please enter your service address.');
+    if (!planEl)                  return showError('Please select a service plan.');
+    if (!initials)                return showError('Please enter your initials to confirm you have read the agreement.');
+    if (!sigHasContent)           return showError('Please draw your signature.');
+    if (!agreed)                  return showError('Please check the agreement acceptance box.');
+
+    // Loading state
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Generating & Sending...';
+
+    try {
+      const sigDataURL = canvas.toDataURL('image/png');
+      const data = { firstName, lastName, email, phone, address, access, plan: planEl.value, initials };
+
+      const pdfDataURI = await generatePDF(data, sigDataURL);
+      const pdfBase64  = pdfDataURI.split(',')[1];
+
+      // Send via EmailJS
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        client_name:    `${firstName} ${lastName}`,
+        client_email:   email,
+        client_phone:   phone,
+        client_address: address,
+        client_access:  access || 'None',
+        service_plan:   planEl.value,
+        client_initials:initials,
+        signed_date:    dateStr,
+        pdf_attachment: pdfBase64,
+        to_email:       email,
+      });
+
+      // Success
+      document.getElementById('main-form').style.display = 'none';
+      document.getElementById('confirm-email').textContent = email;
+      document.getElementById('success-screen').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch(err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.innerHTML = 'Submit Signed Agreement';
+      showError('Something went wrong sending the agreement. Please try again or call us at (813) 575-3535.');
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.className = 'error-msg visible';
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
