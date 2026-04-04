@@ -212,8 +212,10 @@
     .nav-right { display: flex; align-items: center; gap: 20px; }
     .nav-phone { color: var(--charcoal); text-decoration: none; font-size: 0.9rem; font-weight: 700; transition: color 0.2s; }
     .nav-phone:hover { color: var(--sky); }
-    @media(max-width:600px){ .nav-phone { display: none; } }
-
+    @media(max-width:600px){ 
+  .nav-phone { font-size: 0; } 
+  .nav-phone::before { content: '📞'; font-size: 1.2rem; }
+}
     .btn-nav {
       background: var(--navy);
       color: var(--white);
