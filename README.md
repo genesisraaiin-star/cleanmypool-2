@@ -1,5 +1,7 @@
 # 🏊 CleanMyPool — Website Setup Gameplan
 
+> **Tracking update — September 16, 2026:** Start with [TRACKING-SETUP.md](TRACKING-SETUP.md) for the current installation, deployment checks, and Google Ads setup. CleanMyPool uses GA4 `G-HJ7NDM6PN9`. The instructions below are the original project setup notes; they do not establish that Stripe, inbox delivery, or Google Ads conversions are configured. Signup and contact requests use client-side EmailJS; `/api/contact` remains an inactive endpoint.
+
 > **Motto:** All you do is swim.
 > **Target Domain:** cleanmypool.pro (or .com)
 

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script defer src="/assets/analytics.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script defer src="/assets/lead-forms.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -949,8 +952,6 @@
   }
 }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init("8AZcPyaE3LqYBe1o6");</script>
 </head>
 <body>
 
@@ -1162,7 +1163,7 @@
 
         <div class="form-box reveal d1">
           <div class="form-title">Start your service</div>
-          <form id="signup-form">
+          <form id="signup-form" method="post" action="/api/contact">
             <div class="frow">
               <div class="fgroup"><label for="fn">First Name</label><input type="text" id="fn" placeholder="First" required></div>
               <div class="fgroup"><label for="ln">Last Name</label><input type="text" id="ln" placeholder="Last" required></div>
@@ -1194,7 +1195,9 @@
               </div>
             </div>
             <p class="form-terms">By submitting you agree to our <a href="/terms-of-service.html">Terms of Service</a>. Month-to-month, no contracts.</p>
-            <button type="submit" class="btn-submit">Complete Signup →</button>
+            <button type="submit" class="btn-submit" disabled>Complete Signup →</button>
+        <p id="signup-status" role="status" aria-live="polite"></p>
+        <noscript>Please enable JavaScript to sign up, or call <a href="tel:+18135753535">(813) 575-3535</a>.</noscript>
           </form>
         </div>
       </div>
@@ -1365,39 +1368,6 @@
     });
   });
 
-  // Form submit — EmailJS
-  document.getElementById('signup-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('.btn-submit');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    const templateParams = {
-      name:    document.getElementById('fn').value + ' ' + document.getElementById('ln').value,
-      email:   document.getElementById('em').value,
-      phone:   document.getElementById('ph').value,
-      address: document.getElementById('addr').value,
-      plan:    document.getElementById('plan').value,
-      service:   document.getElementById('pt').value,
-      message: `Plan: ${document.getElementById('plan').value} | Pool Type: ${document.getElementById('pt').value} | Address: ${document.getElementById('addr').value} | Phone: ${document.getElementById('ph').value}`,
-      title:   'New CleanMyPool Signup'
-    };
-
-    emailjs.send('service_jpg744s', 'template_kgq0lzo', templateParams)
-      .then(() => {
-        btn.textContent = '✓ Received — we\'ll be in touch!';
-        btn.style.background = '#2DE7E1';
-        btn.style.color = '#090C9B';
-        document.getElementById('signup-form').reset();
-      })
-      .catch((err) => {
-        console.error('EmailJS error:', err);
-        btn.textContent = 'Something went wrong — try again';
-        btn.style.background = '#e53e3e';
-        btn.style.color = '#fff';
-        btn.disabled = false;
-      });
-  });
 </script>
 
 <script>

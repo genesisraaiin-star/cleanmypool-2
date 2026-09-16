@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script defer src="/assets/analytics.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script defer src="/assets/lead-forms.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | CleanMyPool Tampa Bay</title>
@@ -95,12 +98,12 @@
     </div>
   </div>
   <div class="contact-form-wrap">
-    <div class="success-msg" id="success-msg">
+    <div class="success-msg" id="success-msg" role="status" aria-live="polite">
       <div class="icon">🏊</div>
       <h3>Message received!</h3>
       <p>We'll get back to you within 1 business day.</p>
     </div>
-    <form id="contact-form">
+    <form id="contact-form" method="post" action="/api/contact">
       <h2>Send us a message</h2>
       <div class="form-group">
         <label for="c-name">Name *</label>
@@ -128,31 +131,15 @@
         <label for="c-message">Message *</label>
         <textarea id="c-message" name="message" placeholder="How can we help?" required></textarea>
       </div>
-      <button type="submit" class="btn-submit">Send Message →</button>
+      <button type="submit" class="btn-submit" disabled>Send Message →</button>
+      <p id="contact-status" role="status" aria-live="polite"></p>
+      <noscript>Please enable JavaScript to send a message, or call <a href="tel:+18135753535">(813) 575-3535</a>.</noscript>
     </form>
   </div>
 </div>
 <footer>
   <p>© 2026 CleanMyPool LLC · Tampa, FL · <a href="/">Home</a><a href="/terms-of-service.html">Terms</a><a href="/privacy-policy.html">Privacy</a></p>
 </footer>
-<script>
-  document.getElementById('contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const data = {
-      name: document.getElementById('c-name').value,
-      email: document.getElementById('c-email').value,
-      phone: document.getElementById('c-phone').value,
-      subject: document.getElementById('c-subject').value,
-      message: document.getElementById('c-message').value,
-    };
-    try {
-      const res = await fetch('/api/contact', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
-      if (res.ok) {
-        this.style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-      } else { alert('Error sending. Please call us at (813) 575-3535.'); }
-    } catch { alert('Error sending. Please call us at (813) 575-3535.'); }
-  });
-</script>
+
 </body>
 </html>
